@@ -22,10 +22,5 @@ deploy:
   skip_cleanup: true
 
 after_deploy:
-- PKG_VERSION=`node -p "require('./package.json').version"`
-- npm run build:gh-pages
-- git add -f ./dist
-- git add -f ./docs
-- git commit "PUBLISH v${PKG_VERSION}"
-- git tag -a $PKG_VERSION -m $PKG_VERSION 
-- git push -f origin develop:master
+- ./publish.sh
+
