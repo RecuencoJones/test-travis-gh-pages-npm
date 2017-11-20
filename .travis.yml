@@ -1,0 +1,31 @@
+dist: trusty
+language: node_js
+node_js:
+- '6'
+
+install:
+- npm install
+
+script:
+- npm test
+
+before_deploy:
+- npm run clean
+- npm run build:lib
+
+deploy:
+  provider: npm
+  email: david.recuencogadea@gmail.com
+  api_key: "$NPM_TOKEN"
+  on:
+    branch: develop
+  skip_cleanup: true
+
+after_deploy:
+- PKG_VERSION=`node -p "require('./package.json').version"`
+- npm run build:gh-pages
+- git add -f ./dist
+- git add -f ./docs
+- git commit "PUBLISH v${PKG_VERSION}"
+- git tag -a $PKG_VERSION -m $PKG_VERSION 
+- git push -f origin develop:master
