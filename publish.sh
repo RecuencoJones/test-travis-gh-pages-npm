@@ -3,7 +3,10 @@
 git config --global user.email "travis@travis-ci.com"
 git config --global user.name "Travis CI"
 
+git checkout develop
 PKG_VERSION=`node -p "require('./package.json').version"`
+npm run clean
+npm run build:lib
 npm run build:gh-pages
 git add -f ./dist
 git add -f ./docs
