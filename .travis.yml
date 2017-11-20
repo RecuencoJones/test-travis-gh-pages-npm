@@ -7,11 +7,10 @@ install:
 - npm install
 
 script:
-- npm test
+- .travis/build-integration.sh
 
 before_deploy:
-- npm run clean
-- npm run build:lib
+- .travis/build-production.sh
 
 deploy:
   provider: npm
@@ -22,5 +21,4 @@ deploy:
   skip_cleanup: true
 
 after_deploy:
-- ./publish.sh
-
+- .travis/publish.sh
