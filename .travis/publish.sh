@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo $?
+
 git config --global user.email "travis@travis-ci.com"
 git config --global user.name "Travis CI"
 
@@ -15,4 +17,3 @@ git tag -f -a $PKG_VERSION -m $PKG_VERSION
 git remote add origin-publish https://${GITHUB_TOKEN}@github.com/RecuencoJones/test-travis-gh-pages-npm.git
 git push -f origin-publish develop:master
 git push -f origin-publish --tags
-
